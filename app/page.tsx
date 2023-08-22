@@ -18,10 +18,25 @@ getCarList_();
     setCarsList(result?.carLists)
     setCarsOrgList(result?.carLists);
   }
+  const filterCarList=(brand:string)=>{
+    const filterList=carOrgList.filter((item:any)=>item.carBrand==brand);
+    setCarsList(filterList)
+  }
+
+  const orderCarList = (order: any) => {
+    const sortedData = [...carOrgList].sort((a, b) =>
+      order == -1 ? a.price - b.price : b.price - a.price
+    );
+    setCarsList(sortedData);
+  };
   return (
     <main className="container mx-auto">
       <Hero />
-      <CarsFiltersOption carsList={carList} />
+      <CarsFiltersOption
+        carsList={carOrgList}
+        orderCarList={(value: string) => orderCarList(value)}
+        setBrand={(value: string) => filterCarList(value)}
+      />
       <CarsList carsList={carList} />
     </main>
   );

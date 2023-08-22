@@ -1,12 +1,18 @@
 'use client'
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaGasPump } from "react-icons/fa";
 
 import { MdAirlineSeatReclineNormal } from "react-icons/md";
 import { PiSteeringWheelFill } from "react-icons/pi";
 export default function CarCard(props:any) {
-    const [car,setCar] = useState(props.car)
+    const [car,setCar] = useState<any>()
+    useEffect(() => {
+      if(props.car){
+        setCar(props.car)
+      }
+    }, [props.car])
+    
       
   return (
     <div
@@ -16,10 +22,10 @@ hover:border-[1px] cursor-pointer duration-50
 border-cyan-500 shadow-2xl"
     >
       <div className="flex justify-between items-center">
-        <h2 className="text-[20px] font-medium mb-2">{car.name}</h2>
+        <h2 className="text-[20px] font-medium mb-2">{car?.name}</h2>
         <h2 className="text-[28px] font-bold mb-2">
           <span className="text-[12px] font-light">$ </span>
-          {car.price}
+          {car?.price}
           <span className="text-[12px] font-light"> /day</span>
         </h2>
       </div>
@@ -27,7 +33,7 @@ border-cyan-500 shadow-2xl"
       <div className="flex justify-center">
         <Image
           src={car?.image?.url}
-          alt={car.name}
+          alt={car?.name}
           width={220}
           height={200}
           className="w-[250px] h-[150px] 
@@ -48,7 +54,7 @@ border-cyan-500 shadow-2xl"
         <div className=" text-center text-gray-500 ">
           <FaGasPump className="w-full text-[22px] mb-2" />
           <h2 className="line-clamp-5 text-[14px] font-light">
-            {car.carAvg} MPG
+            {car?.carAvg} MPG
           </h2>
         </div>
       </div>
