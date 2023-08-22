@@ -1,6 +1,16 @@
-import React from 'react'
+'use client'
+import { getStoreLocations } from '@/services';
+import React, { useEffect } from 'react'
 
 export default function From() {
+    useEffect(() => {
+        getStoreLocations_();
+    }, [])
+    
+    const getStoreLocations_= async()=>{
+        const resp= await getStoreLocations()
+        console.log(resp)
+    }
   return (
     <div>
       <div className="flex flex-col w-full mb-5">
